@@ -12,11 +12,11 @@ class Mobil extends Model
 
     public function peminjaman()
     {
-        return $this->hasMany(User::class, 'id', 'id_mobil', 'nama_mobil', 'harga_sewa_mobil');
+        return $this->hasMany(Peminjaman::class, 'id', 'datamobil_id');
     }
 
     public function tagihan()
     {
-        return $this->hasMany(Tagihan::class, 'id', 'id_mobil', 'nama_mobil', 'harga_sewa_mobil');
+        return $this->hasMany(Tagihan::class, 'id', 'id_mobil');
     }
 }

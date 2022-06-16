@@ -12,7 +12,7 @@ class Peminjaman extends Model
 
     public function mobil()
     {
-    return $this->belongsTo(Mobil::class);
+    return $this->belongsTo(Mobil::class, 'datamobil_id', 'id');
     }
 
     public function supir()

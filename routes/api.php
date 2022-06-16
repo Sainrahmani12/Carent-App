@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MobilController;
 use App\Http\Controllers\API\SupirController;
+use App\Http\Controllers\API\TagihanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +29,13 @@ Route::controller(MobilController::class)->group(function(){
 Route::controller(SupirController::class)->group(function(){
     Route::get('/supir', 'all');
 });
+
+Route::controller(TagihanController::class)->group(function(){
+    Route::get('/tagihan', 'all');
+});
+
+Route::controller(AuthController::class)->group(function(){
+    Route::post('/regis', 'regis');
+    Route::post('/login', 'login');
+});
+

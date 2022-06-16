@@ -64,9 +64,6 @@
 
 <!-- Armada -->
 
-<!-- sebesudah login -->
-@if(isset(Auth::user()->role))
-@if (Auth::user()->role == 'user')
 <div class="masthead bg-primary text-center">
     <div class="container de-flex mb-5 align-items-center flex-column">
         <!-- Masthead Heading-->
@@ -84,56 +81,38 @@
                     <div class="card-header">
                         <h5 class="card-title text-uppercase">{{$m->nama_mobil}}</h5>
                     </div>
-                    <img src="{{$m->gambar_mobil}}" class="card-img-top" alt="gambar-mobil">
+                    <img src="{{ asset('storage/'. $m->gambar_mobil) }}" class="card-img-top" alt="gambar-mobil">
+                    @if(isset(Auth::user()->role))
+                    @if(Auth::user()->role == 'user')
                     <div class="card-body">
                         <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
                         <a href="/pemesanan"><button type="button" class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button></a>
                     </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-@endif
-@else
-<!-- sebelum login -->
-<div class="masthead bg-primary text-center">
-    <div class="container de-flex mb-5 align-items-center flex-column">
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase text-white mb-0" id="mobil">Armada Kami</h1>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-        </div>
-
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            @foreach ($mobil as $m)
-
-            <div class="col">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h5 class="card-title text-uppercase">{{$m->nama_mobil}}</h5>
-                    </div>
-                    <img src="{{$m->gambar_mobil}}" class="card-img-top" alt="gambar-mobil">
+                    @endif
+                    @if(Auth::user()->role !== 'user')
                     <div class="card-body">
                         <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
-                        <a href="/pemesanan"><button type="button" class="btn btn-outline-secondary disabled mt-3 btn-sm">Booking Now</button></a>
+                        <a href="/pemesanan"><button type="button" class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button></a>
                     </div>
+                    @endif
+                    @else
+                    <div class="card-body">
+                        <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
+                        <button type="button" disabled class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button>
+                    </div>
+                    @endif
                 </div>
             </div>
             @endforeach
         </div>
     </div>
 </div>
-@endif
-
 <!-- end Armada -->
 
 <!-- driver -->
 
 <div class="masthead bg-primary text-center">
-    <div class="container de-flex mb-5 align-items-center flex-column">
+    <div class="container mb-5 align-items-center flex-column">
         <!-- Masthead Heading-->
         <h1 class="masthead-heading text-uppercase text-white mb-0" id="supir">Driver Kami</h1>
         <!-- Icon Divider-->
@@ -187,11 +166,11 @@
                     @foreach ($peminjaman as $p)
                     <tr>
                         <td>{{$p->id}}</td>
-                        <td>{{$p->user?->name}}</td>
-                        <td>{{$p->datamobil_id}}</td>
+                        <td>{{$p->user->name}}</td>
+                        <td>{{$p->mobil?->nama_mobil}}</td>
                         <td>{{$p->peminjaman}}</td>
                         <td>{{$p->pengembalian}}</td>
-                        <td>{{ number_format((int)$p->mobil?->harga_sewa_mobil * (int)$p->jumlah_hari) }},000</td>
+                        <td>{{ number_format((int)$p->mobil?->harga_sewa_mobil * (int)$p->jumlah_hari) }}.000</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -17,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -29,20 +29,12 @@ class HomeController extends Controller
     {
         $mobil = Mobil::all();
         $supir = Supir::all();
-        $peminjaman = Peminjaman::with('mobil')->get();
+        $peminjaman = Peminjaman::all();
         return view('user.isi', compact('mobil', 'supir', 'peminjaman'));
-    }
-
-    public function pemesanan()
-    {
-        $mobil = Mobil::all();
-        $supir = Supir::all();
-        return view('pemesanan', compact('mobil', 'supir'));
     }
 
     public function store(Request $request)
     {
-        $peminjaman = Peminjaman::with('mobil')->get();
         $image = $request->file('image');
         Peminjaman::create([
             'datamobil_id' => $request->datamobil_id,
@@ -54,6 +46,6 @@ class HomeController extends Controller
             'jumlah_hari' => $request->jumlah_hari,
             'foto_peminjam' => $request->file('foto_peminjam')->store('peminjaman')
         ]);
-        return redirect(compact('mobil'))->back();
+        return redirect()->back();
     }
 }

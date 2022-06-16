@@ -21,5 +21,12 @@ class SupirController extends Controller
             else
                 return ResponseFormater::error(null, 'Data supir tidak ditemukan', 404);
         }
+
+        $supir = Supir::all();
+
+        return ResponseFormater::success(
+            $supir->all(),
+            'Data list supir berhasil ditemukan'
+        );
     }
 }
