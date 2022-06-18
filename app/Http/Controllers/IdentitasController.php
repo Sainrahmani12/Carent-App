@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mobil;
+use App\Models\Peminjaman;
 use App\Models\Supir;
 use Illuminate\Http\Request;
 
-class DatasupirController extends Controller
+class IdentitasController extends Controller
 {
     public function __construct()
     {
@@ -20,7 +22,9 @@ class DatasupirController extends Controller
     public function index()
     {
         $supir = Supir::all();
-        return view('admin.supir', compact('supir'));
+        $mobil = Mobil::all();
+        $peminjaman = Peminjaman::all();
+        return view('admin.identitas', compact('peminjaman', 'mobil', 'supir'));
     }
 
     /**
@@ -41,12 +45,7 @@ class DatasupirController extends Controller
      */
     public function store(Request $request)
     {
-        Supir::create([
-            'nama'    => $request->nama,
-            'umur' => $request->umur,
-            'foto' => $request->foto->store('fotosupir/', 'public')
-        ]);
-        return redirect('supir')->with('success', 'Data berhasil ditambahkan');
+        //
     }
 
     /**
@@ -80,14 +79,17 @@ class DatasupirController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Supir::findorfail($id);
-        $data_supir = [
-            'nama'    => $request->nama,
-            'umur' => $request->umur,
-            'foto' => $request->foto->store('fotosupir/', 'public')
+        $update = Peminjaman::findorfail($id);
+        $data_peminjaman = [
+            'datamobil_id' => $request->datamobil_id,
+            'supir_id' => $request->supir_id,
+            'jaminan' => $request->jaminan,
+            'peminjaman' => $request->peminjaman,
+            'pengembalian' => $request->pengembalian,
+            'foto_peminjam' => $request->foto_peminjam->store('fotopeminjam/', 'public')
         ];
-        $update->update($data_supir);
-        return redirect('supir')->with('success', 'Data berhasil diubah');
+        $update->update($data_peminjaman);
+        return redirect('identitas-peminjam')->with('success', 'Data berhasil diubah');
     }
 
     /**
@@ -98,8 +100,8 @@ class DatasupirController extends Controller
      */
     public function destroy($id)
     {
-        $supir = Supir::findorfail($id);
-        $supir->delete();
+        $peminjaman = Peminjaman::findorfail($id);
+        $peminjaman->delete();
         return back()->with('info', 'Data berhasil dihapus');
     }
 }

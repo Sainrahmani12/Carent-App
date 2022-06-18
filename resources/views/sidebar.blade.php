@@ -18,27 +18,33 @@
                 </a>
               </li>
               <li>
-                <a href="...">
+                <a href="/supir">
                   <i class="fas fa-user-tie"></i>
                   <span>Supir</span>
                 </a>
               </li>
               <li>
-                <a href="...">
+                <a href="/identitas-peminjam">
                   <i class="fas fa-id-badge"></i>
                   <span>Identitas</span>
                 </a>
               </li>
               <li>
-                <a href="...">
+                <a href="/tagihan-peminjaman">
                   <i class="fas fa-wallet"></i>
                   <span>Tagihan</span>
                 </a>
               </li>
               <li>
-                <a href="...">
+                <a href="/jadwal-peminjaman">
                   <i class="fas fa-calendar-check"></i>
                   <span>Jadwal</span>
+                </a>
+              </li>
+              <li>
+                <a href="/dashboard">
+                  <i class="fas fa-chart-bar"></i>
+                  <span>Grafik</span>
                 </a>
               </li>
             </ul>

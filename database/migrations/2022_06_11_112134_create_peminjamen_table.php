@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('jaminan');
             $table->string('peminjaman');
             $table->string('pengembalian');
-            $table->string('jumlah_hari');
             $table->string('foto_peminjam');
             $table->timestamps();
         });

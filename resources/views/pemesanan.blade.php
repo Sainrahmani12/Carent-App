@@ -61,11 +61,6 @@
             </div>
 
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Jumlah Hari</label>
-                <input type="number" name="jumlah_hari" class="form-control">
-            </div>
-
-            <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Foto Peminjam</label>
                 <input type="file" name="foto_peminjam" class="form-control">
             </div>

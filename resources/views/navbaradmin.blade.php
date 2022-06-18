@@ -23,36 +23,24 @@
     <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 
         <div class="container-fluid">
-            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                <li class="nav-item dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <div class="avatar-sm">
-                            <img src="../admin/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="/logout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="media align-items-center">
+                            <div class="media-body d-none d-lg-block">
+                                <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
+                            </div>
                         </div>
                     </a>
-                    <ul class="dropdown-menu dropdown-user animated fadeIn">
-                        <div class="dropdown-user-scroll scrollbar-outer">
-                            <li>
-                                <div class="user-box">
-                                    <div class="avatar-lg"><img src="../admin/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
-                                    <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">My Profile</a>
-                                <a class="dropdown-item" href="#">My Balance</a>
-                                <a class="dropdown-item" href="#">Inbox</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Account Setting</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Logout</a>
-                            </li>
-                        </div>
-                    </ul>
+                    <div class="dropdown-menu  dropdown-menu-right ">
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
                 </li>
             </ul>
         </div>

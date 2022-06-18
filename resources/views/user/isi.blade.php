@@ -85,19 +85,19 @@
                     @if(isset(Auth::user()->role))
                     @if(Auth::user()->role == 'user')
                     <div class="card-body">
-                        <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
+                        <h5 class="card-title">Rp {{ number_format((int)$m->harga_sewa_mobil) }}/hari</h5>
                         <a href="/pemesanan"><button type="button" class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button></a>
                     </div>
                     @endif
                     @if(Auth::user()->role !== 'user')
                     <div class="card-body">
-                        <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
+                        <h5 class="card-title">Rp {{ number_format((int)$m->harga_sewa_mobil) }}/hari</h5>
                         <a href="/pemesanan"><button type="button" class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button></a>
                     </div>
                     @endif
                     @else
                     <div class="card-body">
-                        <h5 class="card-title">{{$m->harga_sewa_mobil}}/hari</h5>
+                        <h5 class="card-title">Rp {{ number_format((int)$m->harga_sewa_mobil) }}/hari</h5>
                         <button type="button" disabled class="btn btn-outline-secondary mt-3 btn-sm">Booking Now</button>
                     </div>
                     @endif
@@ -106,6 +106,7 @@
             @endforeach
         </div>
     </div>
+
 </div>
 <!-- end Armada -->
 
@@ -119,24 +120,26 @@
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
         </div>
-        @foreach ($supir as $s)
-        <div class="card h-100 mb-3 mx-1 position-static top-0 start-30" style="max-width: 200px;">
-            <div class="row g-2">
-                <div class="col">
-                    <img src="{{$s->foto}}" class="img-fluid rounded-start" alt="foto-supir">
-                </div>
-                <div class="col-md-8">
+        <div class="row">
+            @foreach ($supir as $s)
+            <div class="col">
+                <div class="card h-100">
+
                     <div class="card-body">
-                        <h5 class="card-title">{{$s->nama}}</h5>
-                        <p class="card-text">{{$s->umur}} Tahun</p>
+                        <div class="card-header">
+                            <img src="{{ asset('storage/'. $s->foto) }}" class="card-img-top" alt="gambar-mobil">
+                        </div>
+                        <h5 class="card-title mt-4 text-uppercase">{{$s->nama}}</h5>
+                        <h5 class="card-title">{{$s->umur}} Tahun</h5>
 
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
     </div>
 </div>
+
 
 <!-- end driver -->
 
@@ -165,12 +168,12 @@
                 <tbody class="list">
                     @foreach ($peminjaman as $p)
                     <tr>
-                        <td>{{$p->id}}</td>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$p->user->name}}</td>
                         <td>{{$p->mobil?->nama_mobil}}</td>
-                        <td>{{$p->peminjaman}}</td>
-                        <td>{{$p->pengembalian}}</td>
-                        <td>{{ number_format((int)$p->mobil?->harga_sewa_mobil * (int)$p->jumlah_hari) }}.000</td>
+                        <td>{{date('d-m-Y', strtotime($p->peminjaman))}}</td>
+                        <td>{{date('d-m-Y', strtotime($p->pengembalian))}}</td>
+                        <td>Rp {{ number_format((int)$p->mobil?->harga_sewa_mobil * (Carbon\Carbon::parse($p->pengembalian)->diffInDays($p->peminjaman))) }} ;</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -43,8 +43,7 @@ class HomeController extends Controller
             'jaminan' => $request->jaminan,
             'peminjaman' => $request->peminjaman,
             'pengembalian' => $request->pengembalian,
-            'jumlah_hari' => $request->jumlah_hari,
-            'foto_peminjam' => $request->file('foto_peminjam')->store('peminjaman')
+            'foto_peminjam' => $request->foto_peminjam->store('fotopeminjam/', 'public')
         ]);
         return redirect()->back();
     }

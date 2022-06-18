@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mobil;
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -27,9 +28,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function tagihan()
     {
-        //
+        $peminjaman = Peminjaman::all();
+        return view('admin.tagihan', compact('peminjaman'));
     }
 
     /**
@@ -38,9 +40,10 @@ class DashboardController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function jadwal()
     {
-        //
+        $peminjaman = Peminjaman::all();
+        return view('admin.jadwal', compact('peminjaman'));
     }
 
     /**
