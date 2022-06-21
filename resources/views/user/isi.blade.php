@@ -81,7 +81,7 @@
                     <div class="card-header">
                         <h5 class="card-title text-uppercase">{{$m->nama_mobil}}</h5>
                     </div>
-                    <img src="{{ asset('storage/'. $m->gambar_mobil) }}" class="card-img-top" alt="gambar-mobil">
+                    <img src="{{ $m->gambar_mobil }}" class="card-img-top" alt="gambar-mobil">
                     @if(isset(Auth::user()->role))
                     @if(Auth::user()->role == 'user')
                     <div class="card-body">
@@ -127,7 +127,7 @@
 
                     <div class="card-body">
                         <div class="card-header">
-                            <img src="{{ asset('storage/'. $s->foto) }}" class="card-img-top" alt="gambar-mobil">
+                            <img src="{{ $s->foto }}" class="card-img-top" alt="gambar-mobil">
                         </div>
                         <h5 class="card-title mt-4 text-uppercase">{{$s->nama}}</h5>
                         <h5 class="card-title">{{$s->umur}} Tahun</h5>
