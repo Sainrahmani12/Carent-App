@@ -43,7 +43,7 @@ class DatamobilController extends Controller
     public function store(Request $request)
     {
         $image  = $request->file('gambar_mobil');
-        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());    
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         Mobil::create([
             'nama_mobil'    => $request->nama_mobil,
             'harga_sewa_mobil' => $request->harga_sewa_mobil,
