@@ -7,6 +7,7 @@ use App\Models\Supir;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CloudinaryStorage;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,8 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
-        $image = $request->file('image');
+        $image  = $request->file('foto_peminjam');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         Peminjaman::create([
             'datamobil_id' => $request->datamobil_id,
             'supir_id' => $request->supir_id,
@@ -43,7 +45,7 @@ class HomeController extends Controller
             'jaminan' => $request->jaminan,
             'peminjaman' => $request->peminjaman,
             'pengembalian' => $request->pengembalian,
-            'foto_peminjam' => $request->foto_peminjam->store('fotopeminjam/', 'public')
+            'foto_peminjam' => $result
         ]);
         return redirect()->back();
     }

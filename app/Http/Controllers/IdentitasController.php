@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\CloudinaryStorage;
 use App\Models\Mobil;
 use App\Models\Peminjaman;
 use App\Models\Supir;
@@ -79,6 +80,8 @@ class IdentitasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $image  = $request->file('foto_peminjam');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         $update = Peminjaman::findorfail($id);
         $data_peminjaman = [
             'datamobil_id' => $request->datamobil_id,
@@ -86,7 +89,7 @@ class IdentitasController extends Controller
             'jaminan' => $request->jaminan,
             'peminjaman' => $request->peminjaman,
             'pengembalian' => $request->pengembalian,
-            'foto_peminjam' => $request->foto_peminjam->store('fotopeminjam/', 'public')
+            'foto_peminjam' => $result
         ];
         $update->update($data_peminjaman);
         return redirect('identitas-peminjam')->with('success', 'Data berhasil diubah');

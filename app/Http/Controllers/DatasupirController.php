@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supir;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CloudinaryStorage;
 
 class DatasupirController extends Controller
 {
@@ -41,10 +42,12 @@ class DatasupirController extends Controller
      */
     public function store(Request $request)
     {
+        $image  = $request->file('foto');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         Supir::create([
             'nama'    => $request->nama,
             'umur' => $request->umur,
-            'foto' => $request->foto->store('fotosupir/', 'public')
+            'foto' => $result
         ]);
         return redirect('supir')->with('success', 'Data berhasil ditambahkan');
     }
@@ -80,11 +83,13 @@ class DatasupirController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $image  = $request->file('foto');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         $update = Supir::findorfail($id);
         $data_supir = [
             'nama'    => $request->nama,
             'umur' => $request->umur,
-            'foto' => $request->foto->store('fotosupir/', 'public')
+            'foto' => $result
         ];
         $update->update($data_supir);
         return redirect('supir')->with('success', 'Data berhasil diubah');

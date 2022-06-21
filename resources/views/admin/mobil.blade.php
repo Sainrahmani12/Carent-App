@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-wrap justify-content-around pb-2">
                                 <div class=" pb-2 pb-md-0 text-center">
-                                    <img src="{{ asset('storage/'. $m->gambar_mobil) }}" width="100%" alt="">
+                                    <img src="{{ $m->gambar_mobil }}" width="100%" alt="">
                                     <div class="card-title mt-3 baru text-center">{{$m->nama_mobil}}</div>
                                     <b>Rp {{ number_format((int)$m->harga_sewa_mobil) }}</b>
                                 </div>
@@ -43,7 +43,7 @@
                                                     <input type="file" name="gambar_mobil" value="{{ $m->gambar_mobil }}" class="form-control">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <img src="{{ asset('storage/'. $m->gambar_mobil) }}" alt="" width="30%">
+                                                    <img src="{{ $m->gambar_mobil }}" alt="" width="30%">
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Submit</button>
                                             </form>

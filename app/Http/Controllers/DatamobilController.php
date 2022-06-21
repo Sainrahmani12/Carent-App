@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mobil;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CloudinaryStorage;
 
 class DatamobilController extends Controller
 {
@@ -41,10 +42,12 @@ class DatamobilController extends Controller
      */
     public function store(Request $request)
     {
+        $image  = $request->file('gambar_mobil');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());    
         Mobil::create([
             'nama_mobil'    => $request->nama_mobil,
             'harga_sewa_mobil' => $request->harga_sewa_mobil,
-            'gambar_mobil' => $request->gambar_mobil->store('gambarmobil/', 'public')
+            'gambar_mobil' => $result
         ]);
         return redirect('datamobil')->with('success', 'Data berhasil ditambahkan');
     }
@@ -80,11 +83,13 @@ class DatamobilController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $image  = $request->file('gambar_mobil');
+        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
         $update = Mobil::findorfail($id);
         $data_mobil = [
             'nama_mobil'    => $request->nama_mobil,
             'harga_sewa_mobil' => $request->harga_sewa_mobil,
-            'gambar_mobil' => $request->gambar_mobil->store('gambarmobil/', 'public')
+            'gambar_mobil' => $result
         ];
         $update->update($data_mobil);
         return redirect('datamobil')->with('success', 'Data berhasil diubah');

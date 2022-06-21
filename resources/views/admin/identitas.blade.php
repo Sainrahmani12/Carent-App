@@ -27,7 +27,7 @@
                                 <td class="text-center">{{$p->mobil?->nama_mobil}}</td>
                                 <td class="text-center">{{$p->jaminan}}</td>
                                 <td class="text-center">{{$p->supir?->nama}}</td>
-                                <td class="text-center"><img src="{{ asset('storage/'. $p->foto_peminjam) }}" width="75" alt=""></td>
+                                <td class="text-center"><img src="{{  $p->foto_peminjam }}" width="75" alt=""></td>
                                 <td class="text-center">
                                     <div class="text-center">
                                         <a class="btn btn-warning" data-toggle="modal" data-target="#modalmobil{{$p->id}}"><i class="fas fa-pen"></i></a>
@@ -82,7 +82,7 @@
                                                         <input type="file" name="foto_peminjam" value="{{ $p->foto }}" class="form-control">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <img src="{{ asset('storage/'. $p->foto_peminjam) }}" alt="" width="30%">
+                                                        <img src="{{ $p->foto_peminjam }}" alt="" width="30%">
                                                     </div>
                                                     <button type="submit" class="btn btn-success">Submit</button>
                                                 </form>

@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-wrap justify-content-around pb-2">
                                 <div class=" pb-2 pb-md-0 text-center">
-                                    <img src="{{ asset('storage/'. $s->foto) }}" width="100%" alt="">
+                                    <img src="{{ $s->foto }}" width="100%" alt="">
                                     <div class="card-title mt-3 baru text-center">{{$s->nama}}</div>
                                     <b>{{$s->umur}} tahun</b>
                                 </div>
@@ -43,7 +43,7 @@
                                                     <input type="file" name="foto" value="{{ $s->foto }}" class="form-control">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <img src="{{ asset('storage/'. $s->foto) }}" alt="" width="30%">
+                                                    <img src="{{ $s->foto }}" alt="" width="30%">
                                                 </div>
                                                 <button type="submit" class="btn btn-success">Submit</button>
                                             </form>
@@ -67,7 +67,7 @@
 </div>
 
 <!-- Modal -->
-<!-- tambah data mobil -->
+<!-- tambah data supir -->
 <div class="modal fade" id="modaltambahmobil" tabindex="-1" role="dialog" aria-labelledby="modalmobilLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
