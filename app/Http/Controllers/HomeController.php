@@ -38,7 +38,7 @@ class HomeController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if (Auth::check() == 'admin' && 'user') 
+        if (Auth::check()) 
         {
             $image  = $request->file('foto_peminjam');
             $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
