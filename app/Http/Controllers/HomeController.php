@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CloudinaryStorage;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -34,19 +35,24 @@ class HomeController extends Controller
         return view('user.isi', compact('mobil', 'supir', 'peminjaman'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        $image  = $request->file('foto_peminjam');
-        $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
-        Peminjaman::create([
-            'datamobil_id' => $request->datamobil_id,
-            'supir_id' => $request->supir_id,
-            'user_id' => Auth::user()->id,
-            'jaminan' => $request->jaminan,
-            'peminjaman' => $request->peminjaman,
-            'pengembalian' => $request->pengembalian,
-            'foto_peminjam' => $result
-        ]);
-        return redirect()->back();
+        if ($user->role == 'admin' && 'user') 
+        {
+            $image  = $request->file('foto_peminjam');
+            $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
+            Peminjaman::create([
+                'datamobil_id' => $request->datamobil_id,
+                'supir_id' => $request->supir_id,
+                'user_id' => Auth::user()->id,
+                'jaminan' => $request->jaminan,
+                'peminjaman' => $request->peminjaman,
+                'pengembalian' => $request->pengembalian,
+                'foto_peminjam' => $result
+            ]);
+            return redirect()->back();
+        } else {
+            return redirect('/login');
+        }
     }
 }
