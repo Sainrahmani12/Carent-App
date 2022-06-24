@@ -13,7 +13,7 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Wedding - Healing - Boaring</p>
+        <p class="masthead-subheading font-weight-light mb-0">Wedding - Healing - Boring</p>
     </div>
 </header>
 
