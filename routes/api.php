@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\MobilController;
 use App\Http\Controllers\API\SupirController;
 use App\Http\Controllers\API\TagihanController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,10 @@ Route::controller(SupirController::class)->group(function(){
 
 Route::controller(TagihanController::class)->group(function(){
     Route::get('/tagihan', 'all');
+});
+
+Route::controller(UserController::class)->group(function(){
+    Route::get('/user', 'all');
 });
 
 Route::controller(AuthController::class)->group(function(){
