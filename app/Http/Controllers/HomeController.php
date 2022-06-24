@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CloudinaryStorage;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -37,7 +38,7 @@ class HomeController extends Controller
 
     public function store(Request $request, User $user)
     {
-        if ($user->role == 'admin' && 'user') 
+        if (Auth::check() == 'admin' && 'user') 
         {
             $image  = $request->file('foto_peminjam');
             $result = CloudinaryStorage::upload($image->getRealPath(), $image->getClientOriginalName());
@@ -50,8 +51,8 @@ class HomeController extends Controller
                 'pengembalian' => $request->pengembalian,
                 'foto_peminjam' => $result
             ]);
-            return redirect()->back();
-        } else {
+            return redirect('/pemesanan');
+        }else{
             return redirect('/login');
         }
     }
